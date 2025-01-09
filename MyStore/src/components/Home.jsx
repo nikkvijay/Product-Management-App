@@ -13,23 +13,24 @@ const Home = () => {
 
     const [filteredProducts, setFilteredProducts] = useState(products);
 
-   
+
     const getProductsByCategory = async () => {
         try {
             const { data } = await instance.get(`/products/category/${category}`);
-            console.log("Category Products:", data); 
+            console.log("Category Products:", data);
             setFilteredProducts(data);
         } catch (error) {
             console.error("Error fetching category products:", error);
         }
     };
 
-  
+
     useEffect(() => {
         if (!category || category === "undefined") {
-            setFilteredProducts(products); 
+            setFilteredProducts(products);
         } else {
-            getProductsByCategory(); 
+            getProductsByCategory();
+            setFilteredProducts(products.filter((p) => p.category == category))
         }
     }, [category, products]);
 
@@ -39,20 +40,20 @@ const Home = () => {
             <div className="h-full w-[85%] p-10 pt-[5%] flex flex-wrap overflow-x-hidden overflow-y-auto">
                 {filteredProducts.map((product) => (
                     <Link
-                        key={product.id} 
-                        to={`/details/${product.id}`} 
+                        key={product.id}
+                        to={`/details/${product.id}`}
                         className="mr-3 mb-3 card pr-6 pl-6 pt-3 pb-3 border-md bg-zinc-100 w-[18%] h-[30vh] flex flex-col justify-center items-center"
                     >
                         <div
                             className="hover:scale-125 mb-3 w-full h-[80%] bg-no-repeat bg-cover bg-center"
                             style={{
                                 backgroundImage: `url(${product.image})`,
-                                backgroundSize: "contain", 
+                                backgroundSize: "contain",
                             }}
                         ></div>
                         <h1 className="hover:text-blue-300 text-center w-full h-[20%] truncate">
                             {product.title}
-                        </h1> 
+                        </h1>
                     </Link>
                 ))}
             </div>

@@ -1,27 +1,45 @@
 import React, { useEffect } from 'react'
 import { use } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import instance from '../utils/axios'
 import { useState } from 'react'
 import Loading from './Loading'
+import { ProductContext } from '../utils/Context'
+import { useContext } from 'react'
 
 const Details = () => {
 
+    const navigate = useNavigate()
+    const [products, setProducts] = useContext(ProductContext);
+
     const [product, setProduct] = useState(null)
     const { id } = useParams()
-    const getsingleproduct = async () => {
-        try {
-            const { data } = await instance.get(`/products/${id}`)
-            setProduct(data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+
+    // so here if our data is coming from API we will use this
+    // const getsingleproduct = async () => {
+    //     try {
+    //         const { data } = await instance.get(`/products/${id}`)
+    //         setProduct(data)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // } 
 
     useEffect(() => {
-        getsingleproduct()
+        if (!product) {
+            setProduct(products.filter(p => p.id == id)[0])
+        }
+        // getsingleproduct()
     }, [])
+
+    const ProductDeleteHandler = (id) => {
+        const FilteredProducts = products.filter((p) => p.id !== id);
+        setProducts(FilteredProducts)
+        localStorage.setItem("products", JSON.stringify(FilteredProducts))
+        navigate("/")
+    }
+
 
     return product ? (
         <div className='w-[70%] flex h-full justify-between items-center m-auto p-[10%]'     >
@@ -39,7 +57,7 @@ const Details = () => {
                 <p className='mb-[5%]'>{product.description}</p>
 
                 <Link className=' mr-3 py-2 px-5 border rounded border-blue-200 text-blue-300'> Edit </Link>
-                <Link className='py-2 px-5 border rounded border-red-200 text-red-300'>Delete</Link>
+                <button onClick={() => ProductDeleteHandler(product.id)} className='py-2 px-5 border rounded border-red-200 text-red-300'>Delete</button>
             </div>
 
 
