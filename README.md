@@ -8,7 +8,7 @@ Follow the steps below to get the project running on your local machine:
 
 ### Clone the repository:
 ```bash
-git clone https://github.com/nikkvijay/product-management-app.git
+git clone https://github.com/nikkvijay/Product-Management-App.git
 ```
 
 ```bash
