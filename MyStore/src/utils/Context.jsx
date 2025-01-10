@@ -5,7 +5,7 @@ import instance from "../utils/axios";
 export const ProductContext = createContext();
 
 const Context = (props) => {
-    const [products, setProducts] = useState(null); 
+    const [products, setProducts] = useState( JSON.parse(localStorage.getItem("products"))||null); 
 
     // Fetch products from the API
     const getProducts = async () => {

@@ -15,7 +15,7 @@ const App = () => {
 
       {shouldShowHomeLink && (
         <Link
-          className="text-red-300 absolute top-[5%] left-[5%] text-lg font-semibold"
+          className="text-red-300 absolute top-[5%] left-[15%] text-lg font-semibold"
           to="/"
         >
           Home
@@ -23,7 +23,7 @@ const App = () => {
       )}
 
 
-      <div className="flex-grow">
+      <div className="flex">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create" element={<Create />} />

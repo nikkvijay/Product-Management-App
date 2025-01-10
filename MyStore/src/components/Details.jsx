@@ -5,23 +5,33 @@ import { useParams } from 'react-router-dom'
 import instance from '../utils/axios'
 import { useState } from 'react'
 import Loading from './Loading'
+import { useContext } from 'react'
+import { ProductContext } from '../utils/Context'
 
 const Details = () => {
 
+    const [products, setproducts] = useContext(ProductContext)
+
     const [product, setProduct] = useState(null)
     const { id } = useParams()
-    const getsingleproduct = async () => {
-        try {
-            const { data } = await instance.get(`/products/${id}`)
-            setProduct(data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+
+    //here i saved api data in local state
+    // const getsingleproduct = async () => {
+    //     try {
+    //         const { data } = await instance.get(`/products/${id}`)
+    //         setProduct(data)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
     useEffect(() => {
-        getsingleproduct()
-    }, [])
+        if (!product) {
+            setProduct(products.filter((p) => p.id === id)[0])
+        }
+        // getsingleproduct()
+
+    }, [[id, product, products]])
 
     return product ? (
         <div className='w-[70%] flex h-full justify-between items-center m-auto p-[10%]'     >

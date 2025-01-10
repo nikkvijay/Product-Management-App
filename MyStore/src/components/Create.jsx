@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
+import { ProductContext } from "../utils/Context";
+import { nanoid } from 'nanoid'
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
-  const [img, setimg] = useState("");
+  const navigate = useNavigate()
+  const [products, setproducts] = useContext(ProductContext)
+  const [image, setimage] = useState("");
   const [title, settitle] = useState("");
   const [category, setcategory] = useState("");
   const [price, setprice] = useState("");
@@ -11,14 +16,22 @@ const Create = () => {
   const AddProductHandler = (e) => {
     e.preventDefault();
 
+
+    if (title.trim().length < 5 || image.trim().length < 5 || description.trim().length < 5 || category.trim().length < 5 || price.trim().length < 1) {
+      alert("Every field is required at last 5 characters long")
+    }
     const product = {
+      id: nanoid(),
       title,
       price,
       category,
       description,
-      img,
+      image,
     };
-    console.log(product);
+    setproducts([...products, product]);
+    localStorage.setItem("products", JSON.stringify([...products, product]))
+    navigate("/") 
+    
   };
 
   return (
@@ -32,8 +45,8 @@ const Create = () => {
         type="url"
         className="w-1/2  text=1xl bg-zinc-100 mb-3 p-3 border rounded"
         placeholder="Image URL"
-        onChange={(e) => setimg(e.target.value)}
-        value={img}
+        onChange={(e) => setimage(e.target.value)}
+        value={image}
       />
       <input
         type="text"
