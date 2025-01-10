@@ -36,21 +36,23 @@ Follow the steps below to get the project running on your local machine:
 ### Clone the repository:
 ```bash
 git clone https://github.com/nikkvijay/product-management-app.git
+```
+
+```bash
 cd product-management-app
+```
 
 Install dependencies
 ```bash
   npm install
-````
+```
 
 Start the development server:
-
 ```bash
   npm run dev
 ```
 
 Open your browser and visit:
-
 ```bash
   http://localhost:5173
 ```
