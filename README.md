@@ -12,7 +12,7 @@ git clone https://github.com/nikkvijay/product-management-app.git
 ```
 
 ```bash
-cd product-management-app
+cd MyStore
 ```
 
 Install dependencies
