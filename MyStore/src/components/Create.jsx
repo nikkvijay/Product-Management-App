@@ -19,7 +19,7 @@ const Create = () => {
 
 
     if (title.trim().length < 5 || image.trim().length < 5 || description.trim().length < 5 || category.trim().length < 5 || price.trim().length < 1) {
-      alert("Every field is required at last 5 characters long")
+      toast.error ("Every field is required at last 5 characters long")
     }
     const product = {
       id: nanoid(),

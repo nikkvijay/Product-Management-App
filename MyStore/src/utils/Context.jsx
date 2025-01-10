@@ -8,19 +8,19 @@ const Context = (props) => {
     const [products, setProducts] = useState(JSON.parse(localStorage.getItem("products")) || null);
 
     // Fetch products from the API
-    const getProducts = async () => {
-        try {
-            const { data } = await instance.get("/products");
-            setProducts(data);
-        } catch (error) {
-            console.error("Error fetching products:", error);
-        }
-    };
+    // const getProducts = async () => {
+    //     try {
+    //         const { data } = await instance.get("/products");
+    //         setProducts(data);
+    //     } catch (error) {
+    //         console.error("Error fetching products:", error);
+    //     }
+    // };
 
 
-    useEffect(() => {
-        getProducts();
-    }, []);
+    // useEffect(() => {
+    //     getProducts();
+    // }, []);
 
 
     return (

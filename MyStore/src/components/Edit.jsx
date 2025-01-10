@@ -36,7 +36,7 @@ const Edit = () => {
             product.category.trim().length < 5 ||
             product.price.trim().length < 1
         ) {
-            alert("Every field is required to be at least 5 characters long");
+            toast.error("Every field is required to be at least 5 characters long");
             return;
         }
 

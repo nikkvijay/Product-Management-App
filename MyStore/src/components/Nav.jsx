@@ -16,7 +16,7 @@ const Nav = () => {
     }
 
 
-    return (    
+    return (
         <>
             <nav className=" w-[15%] h-full bg-zinc-50 flex flex-col items-center pt-5">
                 <a
